@@ -12,8 +12,8 @@ export default function App() {
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoal) => [
       ...currentCourseGoal,
-      enteredGoalText
-    ])
+      enteredGoalText,
+    ]);
   };
 
   return (
@@ -28,7 +28,15 @@ export default function App() {
       </View>
 
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal) => <Text key={goal}>{goal}</Text>)}
+        {courseGoals.map((goal) => (
+          // Needed to apply these style to the view do to IOS not being able to apply styles directly to certian elemnts
+          // hence the second view, try removine the second view and you will notice the styles not being applied.
+          // must apply the styles directly on the elements, can not cassade down like in css.
+
+          <View key={goal} style={styles.goalItem}>
+            <Text style={styles.goalText}>{goal}</Text>
+          </View>
+        ))}
       </View>
     </View>
   );
@@ -58,5 +66,14 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
+  },
+  goalItem: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 6,
+    backgroundColor: '#5e0acc',
+  },
+  goalText: {
+    color: 'white',
   },
 });
