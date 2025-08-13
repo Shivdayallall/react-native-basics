@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 
 export default function App() {
   const [enteredGoalText, setEnteredGoalText] = useState('');
@@ -28,15 +35,17 @@ export default function App() {
       </View>
 
       <View style={styles.goalsContainer}>
-        {courseGoals.map((goal) => (
-          // Needed to apply these style to the view do to IOS not being able to apply styles directly to certian elemnts
-          // hence the second view, try removine the second view and you will notice the styles not being applied.
-          // must apply the styles directly on the elements, can not cassade down like in css.
+        <ScrollView>
+          {courseGoals.map((goal) => (
+            // Needed to apply these style to the view do to IOS not being able to apply styles directly to certian elemnts
+            // hence the second view, try removine the second view and you will notice the styles not being applied.
+            // must apply the styles directly on the elements, can not cassade down like in css.
 
-          <View key={goal} style={styles.goalItem}>
-            <Text style={styles.goalText}>{goal}</Text>
-          </View>
-        ))}
+            <View key={goal} style={styles.goalItem}>
+              <Text style={styles.goalText}>{goal}</Text>
+            </View>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
