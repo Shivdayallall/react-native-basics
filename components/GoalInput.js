@@ -1,4 +1,12 @@
-import { StyleSheet, Text, View, TextInput, Button, Modal } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  Modal,
+  Image,
+} from 'react-native';
 import { useState } from 'react';
 
 const GoalInput = (props) => {
@@ -16,6 +24,10 @@ const GoalInput = (props) => {
   return (
     <Modal visible={props.visible} animationType='slide'>
       <View style={styles.inputContainer}>
+        <Image
+          source={require('..//assets/images/goal.png')}
+          style={styles.image}
+        />
         <TextInput
           style={styles.textInput}
           placeholder='your course goal'
@@ -23,20 +35,16 @@ const GoalInput = (props) => {
           value={enteredGoalText}
         />
         <View style={styles.buttonContainer}>
-          <View>
+          <View style={styles.button}>
             <Button
-              style={styles.button}
               title='Add Goal'
               onPress={addGoalHandler}
+              color='#9d70daff'
             />
           </View>
 
-          <View>
-            <Button
-              style={styles.button}
-              title='Cancel'
-              onPress={props.onCancel}
-            />
+          <View style={styles.button}>
+            <Button title='Cancel' onPress={props.onCancel} color='#f31282' />
           </View>
         </View>
       </View>
@@ -51,16 +59,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 24,
-    borderBottomWidth: 1,
     padding: 16,
-    borderBottomColor: '#cccccc',
+    backgroundColor: '#311b6b',
   },
   textInput: {
     borderWidth: 1,
-    borderColor: '#cccccc',
+    borderColor: '#e4d0ff',
+    backgroundColor: '#e4d0ff',
+    color: '#120438',
+    borderRadius: 6,
     width: '100%',
-    padding: 8,
+    padding: 16,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -69,5 +78,10 @@ const styles = StyleSheet.create({
   button: {
     width: 100,
     marginHorizontal: 8,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 20,
   },
 });

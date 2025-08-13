@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, View, FlatList, Button } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 import GoalItem from './components/GoalItem';
 import GoalInput from './components/GoalInput';
@@ -31,36 +32,39 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title='Add New Goal'
-        color='#5e0acc'
-        onPress={startTheAddGoalHandler}
-      />
-      <GoalInput
-        addGoal={addGoalHandler}
-        onCancel={endTheAddGoalHandler}
-        visible={modalIsVisiable}
-      />
-
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-          renderItem={(dataItem) => {
-            return (
-              <GoalItem
-                text={dataItem.item.text}
-                id={dataItem.item.id}
-                onDeleteItem={deleteGoalHandler}
-              />
-            );
-          }}
+    <>
+      <StatusBar style='light' />
+      <View style={styles.appContainer}>
+        <Button
+          title='Add New Goal'
+          color='#cbb3ebff'
+          onPress={startTheAddGoalHandler}
         />
+        <GoalInput
+          addGoal={addGoalHandler}
+          onCancel={endTheAddGoalHandler}
+          visible={modalIsVisiable}
+        />
+
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+            renderItem={(dataItem) => {
+              return (
+                <GoalItem
+                  text={dataItem.item.text}
+                  id={dataItem.item.id}
+                  onDeleteItem={deleteGoalHandler}
+                />
+              );
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -69,6 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 50,
     paddingHorizontal: 16,
+    backgroundColor: '#1e085a',
   },
   goalsContainer: {
     flex: 5,
