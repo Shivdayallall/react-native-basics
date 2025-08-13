@@ -6,6 +6,7 @@ import {
   Button,
   TextInput,
   ScrollView,
+  FlatList,
 } from 'react-native';
 
 export default function App() {
@@ -19,7 +20,7 @@ export default function App() {
   const addGoalHandler = () => {
     setCourseGoals((currentCourseGoal) => [
       ...currentCourseGoal,
-      enteredGoalText,
+      { text: enteredGoalText, id: Math.random().toString() },
     ]);
   };
 
@@ -35,17 +36,19 @@ export default function App() {
       </View>
 
       <View style={styles.goalsContainer}>
-        <ScrollView>
-          {courseGoals.map((goal) => (
-            // Needed to apply these style to the view do to IOS not being able to apply styles directly to certian elemnts
-            // hence the second view, try removine the second view and you will notice the styles not being applied.
-            // must apply the styles directly on the elements, can not cassade down like in css.
-
-            <View key={goal} style={styles.goalItem}>
-              <Text style={styles.goalText}>{goal}</Text>
-            </View>
-          ))}
-        </ScrollView>
+        <FlatList
+          data={courseGoals}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+          renderItem={(dataItem) => {
+            return (
+              <View style={styles.goalItem}>
+                <Text style={styles.goalText}>{dataItem.item.text}</Text>
+              </View>
+            );
+          }}
+        />
       </View>
     </View>
   );
